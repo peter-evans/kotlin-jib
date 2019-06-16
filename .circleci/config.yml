@@ -27,7 +27,7 @@ jobs:
           key: gradle-{{ checksum "build.gradle.kts" }}
       - run:
           name: Build image and push to repository
-          command: ./gradlew -q jib
+          command: ./gradlew jib
       - save_cache:
           paths:
              - ~/.gradle
