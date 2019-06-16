@@ -1,0 +1,56 @@
+version: 2.1
+executors:
+  docker-executor:
+    docker:
+      - image: circleci/openjdk:8-stretch
+jobs:
+  build:
+    executor: docker-executor
+    steps:
+      - checkout
+      - restore_cache:
+          key: gradle-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Build and test
+          command: ./gradlew -q build
+      - save_cache:
+          paths:
+             - ~/.gradle
+          key: gradle-{{ checksum "build.gradle.kts" }}
+      - store_test_results:
+          path: build/test-results/
+  publish-tag:
+    executor: docker-executor
+    steps:
+      - checkout
+      - restore_cache:
+          key: gradle-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Build image and push to repository
+          command: ./gradlew -q jib
+      - save_cache:
+          paths:
+             - ~/.gradle
+          key: gradle-{{ checksum "build.gradle.kts" }}
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+  build-and-publish-tags:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - publish-tag:
+          context: org-global
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
