@@ -1,4 +1,4 @@
-# Containerising Kotlin with Jib
+# Containerising Kotlin with Jib [<img align="right" alt="The blog of Peter Evans: Containerising Kotlin with Jib" title="View blog post" src="https://peterevans.dev/img/blog-published-badge.svg">](https://peterevans.dev/posts/containerising-kotlin-with-jib/)
 [![CircleCI](https://circleci.com/gh/peter-evans/kotlin-jib/tree/master.svg?style=svg)](https://circleci.com/gh/peter-evans/kotlin-jib/tree/master)
 
 Writing a `Dockerfile` to containerise an application can often be a non-trivial task. Many times I've spent hours fiddling with different base images and configurations and never being quite satisfied with the result. Well I recently tried [Jib](https://github.com/GoogleContainerTools/jib), one of Google's container tools, and I love it! It builds optimised Docker and [Open Container Initiative (OCI)](https://github.com/opencontainers/image-spec) spec images for JVM applications. For containerising JVM apps I will definitely try and use Jib where possible in future.
