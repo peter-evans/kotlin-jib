@@ -31,7 +31,7 @@ Here is a quick introduction of how to use Jib with Gradle's Kotlin DSL. A compl
 First add the plugin to `build.gradle.kts`
 ```kotlin
 plugins {
-    id("com.google.cloud.tools.jib") version "1.3.0"
+    id("com.google.cloud.tools.jib") version "2.3.0"
 }
 ```
 
