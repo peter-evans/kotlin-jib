@@ -4,7 +4,7 @@ plugins {
     application
     java
     kotlin("jvm") version "1.3.31"
-    id("com.google.cloud.tools.jib") version "1.3.0"
+    id("com.google.cloud.tools.jib") version "2.3.0"
 }
 
 group = "dev.peterevans"
@@ -17,21 +17,25 @@ repositories {
 }
 
 dependencies {
-    val kotlinVersion = "1.3.31"
+    val kotlinVersion = "1.3.+"
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
 
-    val ktorVersion = "1.2.1"
+    val ktorVersion = "1.2.+"
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
     
-    implementation("org.slf4j:slf4j-api:1.7.26")
-    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("org.slf4j:slf4j-api:1.7.+")
+    implementation("ch.qos.logback:logback-classic:1.2.+")
 
-    val junitVersion = "5.3.2"
+    val junitVersion = "5.3.+"
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     testImplementation(kotlin("test-junit5", kotlinVersion))
+}
+
+dependencyLocking {
+    lockAllConfigurations()
 }
 
 application {
